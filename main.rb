@@ -8,4 +8,34 @@ require "active_record"
 require "pry"
 require "yaml"
 
+puts "\n\nLIBRARY MAIN MENU"
+puts "-------------------"
+puts "\n1 -  FIND BOOK"
+puts "2 -  FIND PATRON"
+puts "3 -  FIND STAFF"
+puts "4 -  FIND LIBRARY"
+puts "\n-------------------\n"
+puts "X -  EXIT"
+
+print "Select number: "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 binding.pry
