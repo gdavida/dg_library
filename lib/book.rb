@@ -23,4 +23,4 @@ class Book < ActiveRecord::Base
 
 end
 
-###now need to test for things beyond presence
+##don't know how to test for uniqueness without a test database

@@ -52,6 +52,9 @@ class BookTest < Minitest::Test
 
     b.isbn = nil
     refute(b.valid?, "Should be invalid without a isbn")
+    #test integers only
+    b.isbn = "abc123123123"
+    refute(b.valid?, "Should be invalid with anything other than integers")
   end
 
 #####
@@ -65,6 +68,9 @@ class BookTest < Minitest::Test
 
     b.library_id = nil
     refute(b.valid?, "Should be invalid without a library_id")
+
+    b.library_id = "abc"
+    refute(b.valid?, "Should be invalid with anything other than integers")
   end
 
 #####
@@ -91,6 +97,9 @@ class BookTest < Minitest::Test
 
     b.patron_id = nil
     refute(b.valid?, "Should be invalid without a patron_id")
+
+    b.patron_id = "abc"
+    refute(b.valid?, "Should be invalid with anything other than integers")
   end
 
 #####
