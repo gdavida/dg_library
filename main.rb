@@ -25,6 +25,7 @@ print "Select number: "
 main_choice = gets.chomp
 if main_choice == "1"
 	search_for_book_screen
+	
 end
 
 #### ------------------------------------
