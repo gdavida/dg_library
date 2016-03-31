@@ -8,6 +8,6 @@
 
 p = Patron.new(name: "Davida Gaffney", email: "gdavida@gmail.com", book_id: 1)
 
-s = Patron.new(name: "Karen", email: "karen@librarymail.com", library_id: 2)
+p = Patron.new(name: "Lina Gaffney", email: "linamaria@gmail.com", book_id: 4)
 
-s = Patron.new(name: "Barb", email: "barb@librarymail.com", library_id: 3)
+p = Patron.new(name: "Sadie McGarvey", email: "sgaff25277@gmail.com", book_id: 3)
