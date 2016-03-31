@@ -8,6 +8,10 @@ require "active_record"
 require "pry"
 require "yaml"
 
+
+#### MAIN MENU - SCREEN 0 ---------------
+
+
 puts "\n\nLIBRARY MAIN MENU"
 puts "-------------------"
 puts "\n1 -  FIND BOOK"
@@ -18,7 +22,12 @@ puts "\n-------------------\n"
 puts "X -  EXIT"
 
 print "Select number: "
+main_choice = gets.chomp
+if main_choice == "1"
+	search_for_book_screen
+end
 
+#### ------------------------------------
 
 
 
