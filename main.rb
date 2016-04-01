@@ -47,11 +47,49 @@ def found_book_title(b)
   puts "7 -  VIEW ALL BOOKS"
   puts "\nBACK: head back to the main menu"
   choice = gets.chomp.downcase
+
+  #### check in
+    #CHOICE VALIDATOR, KEEPS PROMPTING FOR A CORRECT ANSWER IF YOU DIDNT PROVIDE
+    while choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6" && choice != "7" && choice != "exit"
+       print "Sorry, that's invalid. Try again: "
+       choice = gets.chomp.downcase
+    end
+
+    #TAKES YOU TO THE APPROPRIATE NEXT SCREEN/MENU BASED ON YOUR # CHOICE
+    if choice == "1" #CHECK IN
+      if b.checked_out == true 
+        b.checked_out = false
+        b.save
+        found_book_title(b)
+      else puts "It is already checked in, please make another choice: "
+        choice = gets.chomp.downcase
+      end
+
+    elsif choice == "2" #CHECK OUT
+      if b.checked_out == false 
+        #call check_out method
+      else puts "It is already checked out, please make another choice: "
+        choice = gets.chomp.downcase
+      end
+    elsif choice == "3"
+      puts "Edit Details"
+    elsif choice == "4"
+      search_for_book_screen
+    elsif choice == "5"
+      puts "Delete Book"
+    elsif choice == "6"
+      add_new_book
+    elsif choice == "7"
+      puts "VIEW ALL BOOKS"
+    elsif choice == "back"
+      puts "See ya!"
+    end
 end
 
 def search_by_title
     # HERES WHAT OUR MENU LOOKS LIKE
-  print "\nWhat is the title of your book?\n"
+  puts "\nWhat is the title of your book?\n"
+  print "                      "
   choice = gets.chomp
 
 
@@ -84,9 +122,9 @@ def search_for_book_screen
 
   while choice != "back"
     # HERES WHAT OUR MENU LOOKS LIKE
-    puts "\n\n\nvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-    puts "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-    puts "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    puts "\n\vvvvvvvvvvvvvvvvvvvvv"
+    puts "vvvvvvvvvvvvvvvvvvvv"
+    puts "vvvvvvvvvvvvvvvvvvvv"
     puts "\n\n\nSEARCH FOR BOOK BY"
     puts "-------------------"
     puts "\n1 -  TITLE"
@@ -99,7 +137,7 @@ def search_for_book_screen
     puts "7 -  VIEW ALL BOOKS"
     puts "\nBACK: head back to the main menu"
 
-	  print "Select number: "
+	  print "\n\nSelect number: "
 	  choice = gets.chomp
 
 	  #CHOICE VALIDATOR, KEEPS PROMPTING FOR A CORRECT ANSWER IF YOU DIDNT PROVIDE
@@ -114,15 +152,15 @@ def search_for_book_screen
 	   search_by_title
 	  elsif choice == "2"
 	    puts "Search by AUTHOR"
-	  elsif choice == "2"
+	  elsif choice == "3"
 	    puts "Search by ISBN"
-	  elsif choice == "2"
+	  elsif choice == "4"
 	    puts "Search by PATRON"
-	  elsif choice == "2"
+	  elsif choice == "5"
 	    puts "Search by BRANCH LIBRARY"
-	  elsif choice == "2"
+	  elsif choice == "6"
 	    puts "ADD NEW BOOK"
-	  elsif choice == "2"
+	  elsif choice == "7"
 	    puts "VIEW ALL BOOKS"
 	  elsif choice == "back"
 	    puts "See ya!"
