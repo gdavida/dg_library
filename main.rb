@@ -22,24 +22,58 @@ require "yaml"
 #### --------------------------------
 #####################################
 #### SEARCH FOR BOOK BY - SCREEN 1-1 ----
+def found_book_title(b)
+	puts "\n\nvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+	puts "#{b.title} by #{b.author}"
+	puts "ISBN: #{b.isbn}"
+	puts "Home Branch: #{b.library.branch_name}"
+	  #instead of: Library.find(b.library_id).branch_name}
+	  # client = Client.find(10)
+	if b.checked_out == true
+	  puts "Checked out to #{Patron.find(b.patron_id).name}"
+	else
+	  puts "CHECKED IN"
+	end
+
+  puts "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+  puts "\nWhat would you like to do with this book?\n"
+  puts "\n1 - CHECK IN"
+  puts "2 - CHECK OUT"
+  puts "3 - EDIT DETAILS"
+  puts "\n-------------------\n"
+  puts "4 - FIND NEW BOOK"
+  puts "5 - DELETE BOOK"
+  puts "6 -  ADD NEW BOOK"
+  puts "7 -  VIEW ALL BOOKS"
+  puts "\nBACK: head back to the main menu"
+  choice = gets.chomp.downcase
+end
 
 def search_by_title
     # HERES WHAT OUR MENU LOOKS LIKE
-    print "What is the title of your book? "
-    choice = gets.chomp
+  print "\nWhat is the title of your book?\n"
+  choice = gets.chomp
 
-    #not applicable to this
-    # #CHOICE VALIDATOR, KEEPS PROMPTING FOR A CORRECT ANSWER IF YOU DIDNT PROVIDE
-    # while choice != (1..7) && choice != "back"
-    #    print "Sorry, that's invalid. Try again: "
-    #    choice = gets.chomp.downcase
-    # end
 
-    #SEARCHES FOR BOOK BY TITLE
-    print Book.find_by title: choice
+  #not applicable to this
+  # #CHOICE VALIDATOR, KEEPS PROMPTING FOR A CORRECT ANSWER IF YOU DIDNPROVIDE
+  # while choice != (1..7) && choice != "back"
+  #    print "Sorry, that's invalid. Try again: "
+  #    choice = gets.chomp.downcase
+  # end
 
+  #SEARCHES FOR BOOK BY TITLE
+  b = Book.find_by title: choice
+  if b == nil
+  	puts "needs to be a method to a new screen that says we cant find that, would you like to add a new book or search again? and then bring to the 1-1 screen"
+  	  	################"
+  	# didnt_find_book
+  else found_book_title(b)
+ 	end
+  
 
 end
+
 
 #### --------------------------------
 #####################################
@@ -108,7 +142,7 @@ def main_menu
 
   while choice != "exit"
 
-    puts "\n\nLIBRARY MAIN MENU"
+    puts "\nLIBRARY MAIN MENU"
     puts "-------------------"
     puts "\n1 -  FIND BOOK"
     puts "2 -  FIND PATRON"
