@@ -8,65 +8,124 @@ require "active_record"
 require "pry"
 require "yaml"
 
-#####################################
-#### SEARCH FOR BOOK BY - SCREEN 1-1 ----
-def search_for_book_screen
+# require statements
 
-puts "\n\n\nvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-puts "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-puts "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-puts "\n\n\nSEARCH FOR BOOK BY"
-puts "-------------------"
-puts "\n1 -  TITLE"
-puts "2 -  AUTHOR"
-puts "3 -  ISBN"
-puts "4 -  PATRON"
-puts "5 -  BRANCH LIBRARY"
-puts "\n-------------------\n"
-puts "6 -  ADD NEW BOOK"
-puts "7 -  VIEW ALL BOOKS"
+# Index
+# Show
+# New / Create
+# Edit / Update
+# Destroy
 
-puts "X -  EXIT"
-end
+# main menu
+# - sub-menus
 
 #### --------------------------------
-#### MAIN MENU - SCREEN 0 ---------------
+#####################################
+#### SEARCH FOR BOOK BY - SCREEN 1-1 ----
 
+def search_for_book_screen
+  choice = ""
 
-puts "\n\nLIBRARY MAIN MENU"
-puts "-------------------"
-puts "\n1 -  FIND BOOK"
-puts "2 -  FIND PATRON"
-puts "3 -  FIND STAFF"
-puts "4 -  FIND LIBRARY"
-puts "\n-------------------\n"
-puts "X -  EXIT"
+  while choice != "back"
+    # HERES WHAT OUR MENU LOOKS LIKE
+    puts "\n\n\nvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    puts "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    puts "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    puts "\n\n\nSEARCH FOR BOOK BY"
+    puts "-------------------"
+    puts "\n1 -  TITLE"
+    puts "2 -  AUTHOR"
+    puts "3 -  ISBN"
+    puts "4 -  PATRON"
+    puts "5 -  BRANCH LIBRARY"
+    puts "\n-------------------\n"
+    puts "6 -  ADD NEW BOOK"
+    puts "7 -  VIEW ALL BOOKS"
 
-print "Select number: "
-main_choice = gets.chomp
-if main_choice == "1"
-	search_for_book_screen
-	
+    puts "\n
+
+    BACK: head back to the main menu"
+
+	  print "Select number: "
+	  choice = gets.chomp
+
+	  #CHOICE VALIDATOR, KEEPS PROMPTING FOR A CORRECT ANSWER IF YOU DIDNT PROVIDE
+	  while choice != (1..7) && choice != "back"
+	     print "Sorry, that's invalid. Try again: "
+	     choice = gets.chomp.downcase
+	  end
+
+	  #TAKES YOU TO THE APPROPRIATE NEXT SCREEN/MENU BASED ON YOUR # CHOICE
+	  if choice == "1"
+	   puts "Search by TITLE"
+	  elsif choice == "2"
+	    puts "Search by AUTHOR"
+	  elsif choice == "2"
+	    puts "Search by ISBN"
+	  elsif choice == "2"
+	    puts "Search by PATRON"
+	  elsif choice == "2"
+	    puts "Search by BRANCH LIBRARY"
+	  elsif choice == "2"
+	    puts "ADD NEW BOOK"
+	  elsif choice == "2"
+	    puts "VIEW ALL BOOKS"
+	  elsif choice == "back"
+	    puts "See ya!"
+	  end
+  end
+
+	  puts "back to the main menu"
 end
 
-#### ------------------------------------
+  
+#### --------------------------------
+#####################################
+#### MAIN MENU - SCREEN 0 ---------------
 
+def main_menu
+  choice = ""
 
+  while choice != "exit"
 
+    puts "\n\nLIBRARY MAIN MENU"
+    puts "-------------------"
+    puts "\n1 -  FIND BOOK"
+    puts "2 -  FIND PATRON"
+    puts "3 -  FIND STAFF"
+    puts "4 -  FIND LIBRARY"
+    puts "\n-------------------\n"
+    puts "EXIT -  EXIT PROGRAM"
+    print "Select number: "
+    choice = gets.chomp.downcase
 
+	  while choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "exit"
+	    print "Sorry, that's not a valid option. Try again: "
+	    choice = gets.chomp.downcase
+	  end
 
+	  if choice == "1"
+	    search_for_book_screen # method call
+	    puts "==============going to the Book Menu"
+	  elsif choice == "2"
+	    search_for_patron_screen # method call
+	    puts "==============going to the Patron Menu"
+	  elsif choice == "3"
+	    search_for_staff_screen # method call
+	    puts "==============going to the Staff Menu"
+	  elsif choice == "4"
+	    search_for_patron_screen # method call
+	    puts "==============going to the Library Menu"
+	  elsif choice == "exit"
+	    puts "You chose to leave"
+	  end
+  end
+end
 
+# this is where our driver actually starts
 
-
-
-
-
-
-
-
-
-
-
-
+puts "\n\n\nWelcome to Our Driver Demo!"
+main_menu
+puts "Goodbye"
 
 binding.pry
