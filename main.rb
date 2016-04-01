@@ -23,6 +23,28 @@ require "yaml"
 #####################################
 #### SEARCH FOR BOOK BY - SCREEN 1-1 ----
 
+def search_by_title
+    # HERES WHAT OUR MENU LOOKS LIKE
+    print "What is the title of your book? "
+    choice = gets.chomp
+
+    #not applicable to this
+    # #CHOICE VALIDATOR, KEEPS PROMPTING FOR A CORRECT ANSWER IF YOU DIDNT PROVIDE
+    # while choice != (1..7) && choice != "back"
+    #    print "Sorry, that's invalid. Try again: "
+    #    choice = gets.chomp.downcase
+    # end
+
+    #SEARCHES FOR BOOK BY TITLE
+    print Book.find_by title: choice
+
+
+end
+
+#### --------------------------------
+#####################################
+#### SEARCH FOR BOOK BY - SCREEN 1-1 ----
+
 def search_for_book_screen
   choice = ""
 
@@ -41,23 +63,21 @@ def search_for_book_screen
     puts "\n-------------------\n"
     puts "6 -  ADD NEW BOOK"
     puts "7 -  VIEW ALL BOOKS"
-
-    puts "\n
-
-    BACK: head back to the main menu"
+    puts "\nBACK: head back to the main menu"
 
 	  print "Select number: "
 	  choice = gets.chomp
 
 	  #CHOICE VALIDATOR, KEEPS PROMPTING FOR A CORRECT ANSWER IF YOU DIDNT PROVIDE
-	  while choice != (1..7) && choice != "back"
+	  while choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6" && choice != "7" && choice != "exit"
 	     print "Sorry, that's invalid. Try again: "
 	     choice = gets.chomp.downcase
 	  end
 
 	  #TAKES YOU TO THE APPROPRIATE NEXT SCREEN/MENU BASED ON YOUR # CHOICE
 	  if choice == "1"
-	   puts "Search by TITLE"
+	   puts ".............searching by title..."
+	   search_by_title
 	  elsif choice == "2"
 	    puts "Search by AUTHOR"
 	  elsif choice == "2"
