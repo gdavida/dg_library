@@ -16,7 +16,7 @@ class Book < ActiveRecord::Base
   
 	validates :title, presence: true
 	validates :author, presence: true
-	validates :isbn, presence: true, uniqueness: true, numericality: {only_integer: true}
+	validates :isbn, presence: true, uniqueness: true
 	validates :library_id, presence: true, numericality: {only_integer: true}
 	validates :checked_out, presence: true
 	validates :patron_id, numericality: {only_integer: true}
