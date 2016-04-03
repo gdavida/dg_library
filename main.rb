@@ -22,8 +22,57 @@ require "yaml"
 #### --------------------------------
 #####################################
 #### SEARCH FOR BOOK BY - SCREEN 1-1 ----
-def found_book_title(b)
-	puts "\n\nvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+def book_edit_menu(b)
+    puts "vvvvvvvvvvvvvvvvvvvv"
+    puts "EDIT BOOK DETAILS"
+    puts "-------------------"
+    puts "Which part of the book do you want to edit?"
+    puts "\n1 -  TITLE"
+    puts "2 -  AUTHOR"
+    puts "3 -  ISBN"
+    puts "4 -  HOME BRANCH LIBRARY"
+    puts "\n-------------------\n"
+
+    if choice == "1"
+     b.title = gets.chomp
+    elsif choice == "2"
+     b.author = gets.chomp
+    elsif choice == "3"
+     b.isbn = gets.chomp
+    elsif choice == "4"
+     b.library_id = gets.chomp
+    elsif choice == "back"
+      puts "See ya!"
+    else print "Sorry, that's invalid. Try again: "
+      choice = gets.chomp.downcase
+    end
+
+
+end
+
+
+def add_new_book
+  b = Book.new
+  print "Title: "
+  b.title = gets.chomp
+  print "Author: "
+  b.author = gets.chomp
+  print "ISBN: "
+  b.isbn = gets.chomp
+  print "Home Library ID: "
+  b.library_id = gets.chomp
+  print "Checked-out?: "
+  b.checked_out = gets.chomp
+  print "Patron Name: "
+  b.patron_id = gets.chomp
+  b.save
+  found_it(record)
+end
+
+
+### FOUND BOOK
+def found_it(record)
+	puts "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
 	puts "#{b.title} by #{b.author}"
 	puts "ISBN: #{b.isbn}"
 	puts "Home Branch: #{b.library.branch_name}"
@@ -36,7 +85,7 @@ def found_book_title(b)
 	end
 
   puts "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
-  puts "\nWhat would you like to do with this book?\n"
+  puts "What would you like to do with this book?\n"
   puts "\n1 - CHECK IN"
   puts "2 - CHECK OUT"
   puts "3 - EDIT DETAILS"
@@ -60,7 +109,7 @@ def found_book_title(b)
       if b.checked_out == true 
         b.checked_out = false
         b.save
-        found_book_title(b)
+        found_it(record)
       else puts "It is already checked in, please make another choice: "
         choice = gets.chomp.downcase
       end
@@ -72,7 +121,7 @@ def found_book_title(b)
         choice = gets.chomp.downcase
       end
     elsif choice == "3"
-      puts "Edit Details"
+      book_edit_menu(b)
     elsif choice == "4"
       search_for_book_screen
     elsif choice == "5"
@@ -86,29 +135,39 @@ def found_book_title(b)
     end
 end
 
+### SEARCH BY AUTHOR
+def search_by_author
+    # HERES WHAT OUR MENU LOOKS LIKE
+  puts "\nWho is the author of your book?\n"
+  print "    Author -- "
+  choice = gets.chomp
+
+  #SEARCHES FOR BOOK BY TITLE
+  b = Book.find_by author: choice
+  if b == nil
+    puts "needs to be a method to a new screen that says we cant find that, would you like to add a new book or search again? and then bring to the 1-1 screen\n\n\n\n\n\n"
+        ################"
+    # didnt_find_book
+  else found_it(record)
+  end
+
+end
+
+### SEARCH BY TITLE
 def search_by_title
     # HERES WHAT OUR MENU LOOKS LIKE
   puts "\nWhat is the title of your book?\n"
-  print "                      "
+  print "    Title -- "
   choice = gets.chomp
-
-
-  #not applicable to this
-  # #CHOICE VALIDATOR, KEEPS PROMPTING FOR A CORRECT ANSWER IF YOU DIDNPROVIDE
-  # while choice != (1..7) && choice != "back"
-  #    print "Sorry, that's invalid. Try again: "
-  #    choice = gets.chomp.downcase
-  # end
 
   #SEARCHES FOR BOOK BY TITLE
   b = Book.find_by title: choice
   if b == nil
-  	puts "needs to be a method to a new screen that says we cant find that, would you like to add a new book or search again? and then bring to the 1-1 screen"
-  	  	################"
-  	# didnt_find_book
-  else found_book_title(b)
- 	end
-  
+    puts "needs to be a method to a new screen that says we cant find that, would you like to add a new book or search again? and then bring to the 1-1 screen"
+        ################"
+    # didnt_find_book
+  else found_it(record)
+  end
 
 end
 
@@ -122,10 +181,10 @@ def search_for_book_screen
 
   while choice != "back"
     # HERES WHAT OUR MENU LOOKS LIKE
-    puts "\n\vvvvvvvvvvvvvvvvvvvvv"
+    puts "vvvvvvvvvvvvvvvvvvvvv"
     puts "vvvvvvvvvvvvvvvvvvvv"
     puts "vvvvvvvvvvvvvvvvvvvv"
-    puts "\n\n\nSEARCH FOR BOOK BY"
+    puts "\nSEARCH FOR BOOK BY"
     puts "-------------------"
     puts "\n1 -  TITLE"
     puts "2 -  AUTHOR"
@@ -159,7 +218,7 @@ def search_for_book_screen
 	  elsif choice == "5"
 	    puts "Search by BRANCH LIBRARY"
 	  elsif choice == "6"
-	    puts "ADD NEW BOOK"
+	    add_new_book
 	  elsif choice == "7"
 	    puts "VIEW ALL BOOKS"
 	  elsif choice == "back"
