@@ -28,6 +28,12 @@ require "yaml"
 # - sub-menus
 
 
+# DESTROY
+#------------------------------
+# Prompts with questions for user to add new book to book database
+# 
+#
+
 def delete_book(b)
   print "Are you sure you want to delete this book?"
     answer = gets.chomp
@@ -38,7 +44,7 @@ def delete_book(b)
 end
 
 
-
+# CREATE / ADD
 #------------------------------
 # Prompts with questions for user to add new book to book database
 # 
@@ -52,9 +58,8 @@ def add_new_patron
   p.name = gets.chomp
   print "Email: "
   p.email = gets.chomp
-
+  print "ISBN: "
   p.isbn = gets.chomp
-
   p.save
   found_it(record)
 end
@@ -77,7 +82,7 @@ def add_new_book
   found_it(record)
 end
 
-
+# READ / SEARCH
 #------------------------------
 # type in patron name to see if they exist in patron database and if they do then get their id number, if they dont you can add them or search for a different patron
 # 
@@ -105,6 +110,7 @@ def search_patron
 end
 
 
+# EDIT / UPDATE 
 #------------------------------
 # Updates checked_out to FALSE and sets patron_id to 00 (the circulation desk)
 # 
@@ -118,6 +124,7 @@ def check_in(b)
   end
 end
 
+# 
 #------------------------------
 # Updates checked_out to TRUE and finds out patron_id to associate the book with whoever is checking it out
 # 
@@ -137,7 +144,7 @@ end
 def view_all_books
   list_of_books = Book.all
   list_of_books.map {|b|
-    puts "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+    puts "\nvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv\n"
     puts "#{b.title} by #{b.author}"
     puts "ISBN: #{b.isbn}"
     puts "Home Branch: #{b.library.branch_name}"
